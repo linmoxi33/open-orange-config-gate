@@ -25,6 +25,10 @@
           "key": "analytics_engine_datasets",
           "line": 6,
           "message": "binding `ANALYTICS` (analytics_engine_datasets) is not supported: writeDataPoint() drops each data point without raising, so the Worker appears healthy while losing all writes",
+          "referenced_at": {
+            "file": "index.ts",
+            "line": 5
+          },
           "severity": "blocker",
           "status": "not_supported"
         },
@@ -38,6 +42,10 @@
           "key": "kv_namespaces",
           "line": 5,
           "message": "binding `CACHE` (kv_namespaces) runs with known differences; check the binding doc before relying on it",
+          "referenced_at": {
+            "file": "index.ts",
+            "line": 4
+          },
           "severity": "info",
           "status": "drop_in"
         },

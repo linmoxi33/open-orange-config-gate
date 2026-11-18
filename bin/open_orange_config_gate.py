@@ -30,8 +30,9 @@ README = f"https://github.com/{UPSTREAM}/blob/{PIN}/README.md"
 # mode:   none | degraded | throws_until_configured | throws | silent_drop
 BINDINGS: dict[str, tuple[str, str, str]] = {
     "kv_namespaces": ("drop_in", "none", 118),
-    "d1_databases": ("drop_in", "none", 155),  # README table row
-    "queues": ("drop_in", "none", 157),
+    "d1_databases": ("drop_in", "none", 119),
+    "r2_buckets": ("drop_in", "none", 121),
+    "queues": ("drop_in", "none", 122),
     "ratelimits": ("drop_in", "none", 120),
     "secrets_store_secrets": ("drop_in", "none", 109),
     "version_metadata": ("drop_in", "none", 110),

@@ -19,7 +19,7 @@
           "binding": "DB",
           "code": "BINDING_DROP_IN",
           "environment": "production",
-          "evidence": "https://github.com/rivet-dev/open-orange/blob/e5e795446d2b8d9e7be289d6fbc6f87630e1ef34/docs/modules/bindings.mdx#L155",
+          "evidence": "https://github.com/rivet-dev/open-orange/blob/e5e795446d2b8d9e7be289d6fbc6f87630e1ef34/docs/modules/bindings.mdx#L119",
           "failure_mode": "none",
           "fix": "read the per-binding doc page and add a conformance test for the listed difference",
           "key": "d1_databases",

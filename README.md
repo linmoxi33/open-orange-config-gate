@@ -62,7 +62,7 @@ Zero dependencies, Python 3.11+ (uses `tomllib`). Nothing to install:
 ```bash
 git clone git@github-linmoxi33:linmoxi33/open-orange-config-gate.git
 cd open-orange-config-gate
-python3 -m unittest discover -s tests          # 27 tests
+python3 -m unittest discover -s tests          # 30 tests
 ```
 
 ## Usage
@@ -86,6 +86,12 @@ WARNING shop-api/production L8 `containers` is accepted but only with a warning 
 WARNING shop-api-edge/edge L13 [AI] binding `AI` (ai) needs a configured provider; ...
 summary: 2 blocker(s), 3 warning(s), 1 silent-data-loss item(s), 3 worker env(s)
 ```
+
+Real upstream configs (not our fixtures): the 7 example configs from the pinned commit
+(`hello-durable-object`, `multi-worker/{gateway,auth,jobs}`, `r2`, `sandbox`, `workers-ai`) all parse and
+classify to 0 blockers / 11 warnings, including `r2_buckets` as drop-in and `containers` as
+"accepted with a warning". No real config is vendored into this repo; the check is reproducible with
+`gh api` on the pinned commit.
 
 `--json` output (trimmed real run, see `examples/out/risky.json` for the full document):
 

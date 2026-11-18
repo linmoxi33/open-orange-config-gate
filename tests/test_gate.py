@@ -70,6 +70,12 @@ class ConfigTests(unittest.TestCase):
                           "consumers": [{"queue": "q", "max_batch_size": 10}]}}
         self.assertEqual(gate.declared_bindings(cfg)["queues"], ["OUT"])
 
+    def test_r2_bucket_is_recognized_not_ignored(self):
+        res = gate.analyze({"name": "w", "r2_buckets": [{"binding": "FILES", "bucket_name": "f"}]},
+                           "wrangler.jsonc", "", None, [])
+        codes = [f["code"] for f in res["workers"][0]["findings"]]
+        self.assertEqual(codes, ["BINDING_DROP_IN"])
+
     def test_durable_object_uses_name_field(self):
         cfg = {"durable_objects": {"bindings": [{"name": "ROOM", "class_name": "Room"}]}}
         self.assertEqual(gate.declared_bindings(cfg)["durable_objects"], ["ROOM"])
