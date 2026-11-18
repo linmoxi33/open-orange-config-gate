@@ -1,0 +1,10 @@
+{
+  // A config that OpenOrange can run: every binding here is drop-in.
+  "name": "clean-worker",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-09-03",
+  "kv_namespaces": [{ "binding": "CACHE", "id": "cache" }],
+  "d1_databases": [{ "binding": "DB", "database_name": "app", "database_id": "local" }],
+  "queues": { "producers": [{ "binding": "EMAILS", "queue": "emails" }] },
+  "observability": { "enabled": true },
+}

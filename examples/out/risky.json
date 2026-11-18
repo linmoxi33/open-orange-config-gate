@@ -1,0 +1,112 @@
+{
+  "input_sha256": "1f894fa5335dcaa1c89b935165b8baab36387e92bcf6c26ebcb90cf3d2aa2179",
+  "pinned_commit": "e5e795446d2b8d9e7be289d6fbc6f87630e1ef34",
+  "schema_version": 1,
+  "summary": {
+    "blockers": 2,
+    "silent_data_loss": 1,
+    "warnings": 3,
+    "workers": 3
+  },
+  "tool": "open-orange-config-gate",
+  "upstream": "https://github.com/rivet-dev/open-orange",
+  "workers": [
+    {
+      "config": "examples/in/risky/wrangler.jsonc",
+      "environment": "production",
+      "findings": [
+        {
+          "binding": "ANALYTICS",
+          "code": "SILENT_DATA_LOSS_RISK",
+          "environment": "production",
+          "evidence": "https://github.com/rivet-dev/open-orange/blob/e5e795446d2b8d9e7be289d6fbc6f87630e1ef34/docs/modules/bindings.mdx#L130",
+          "failure_mode": "silent_drop",
+          "fix": "remove the Analytics Engine binding or replace writeDataPoint() with an explicit sink; OpenOrange drops the points without an error",
+          "key": "analytics_engine_datasets",
+          "line": 6,
+          "message": "binding `ANALYTICS` (analytics_engine_datasets) is not supported: writeDataPoint() drops each data point without raising, so the Worker appears healthy while losing all writes",
+          "severity": "blocker",
+          "status": "not_supported"
+        },
+        {
+          "binding": "CACHE",
+          "code": "BINDING_DROP_IN",
+          "environment": "production",
+          "evidence": "https://github.com/rivet-dev/open-orange/blob/e5e795446d2b8d9e7be289d6fbc6f87630e1ef34/docs/modules/bindings.mdx#L118",
+          "failure_mode": "none",
+          "fix": "read the per-binding doc page and add a conformance test for the listed difference",
+          "key": "kv_namespaces",
+          "line": 5,
+          "message": "binding `CACHE` (kv_namespaces) runs with known differences; check the binding doc before relying on it",
+          "severity": "info",
+          "status": "drop_in"
+        },
+        {
+          "binding": "INDEX",
+          "code": "BINDING_NOT_SUPPORTED",
+          "environment": "production",
+          "evidence": "https://github.com/rivet-dev/open-orange/blob/e5e795446d2b8d9e7be289d6fbc6f87630e1ef34/docs/modules/bindings.mdx#L131",
+          "failure_mode": "throws",
+          "fix": "move this binding behind a Cloudflare-only worker, or remove it before migrating",
+          "key": "vectorize",
+          "line": 7,
+          "message": "binding `INDEX` (vectorize) is not supported: calls throw at runtime",
+          "severity": "blocker",
+          "status": "not_supported"
+        },
+        {
+          "binding": null,
+          "code": "CONFIG_ACCEPTED_WITH_WARNING",
+          "environment": "production",
+          "evidence": "https://github.com/rivet-dev/open-orange/blob/e5e795446d2b8d9e7be289d6fbc6f87630e1ef34/docs/modules/bindings.mdx#L173",
+          "failure_mode": "degraded",
+          "fix": "verify the container-dependent path manually",
+          "key": "containers",
+          "line": 8,
+          "message": "`containers` is accepted but only with a warning under `orange dev`",
+          "severity": "warning"
+        }
+      ],
+      "name": "shop-api"
+    },
+    {
+      "config": "examples/in/risky/wrangler.jsonc",
+      "environment": "staging",
+      "findings": [],
+      "name": "shop-api-staging"
+    },
+    {
+      "config": "examples/in/risky/wrangler.jsonc",
+      "environment": "edge",
+      "findings": [
+        {
+          "binding": "AI",
+          "code": "BINDING_NEEDS_SERVICE",
+          "environment": "edge",
+          "evidence": "https://github.com/rivet-dev/open-orange/blob/e5e795446d2b8d9e7be289d6fbc6f87630e1ef34/docs/modules/bindings.mdx#L126",
+          "failure_mode": "throws_until_configured",
+          "fix": "configure the provider env var documented for this binding, or do not rely on it locally",
+          "key": "ai",
+          "line": 13,
+          "message": "binding `AI` (ai) needs a configured provider; without it calls throw, with it they run against a non-Cloudflare service",
+          "severity": "warning",
+          "status": "needs_service"
+        },
+        {
+          "binding": "AUTH",
+          "code": "BINDING_PARTIAL",
+          "environment": "edge",
+          "evidence": "https://github.com/rivet-dev/open-orange/blob/e5e795446d2b8d9e7be289d6fbc6f87630e1ef34/docs/modules/bindings.mdx#L115",
+          "failure_mode": "degraded",
+          "fix": "read the per-binding doc page and add a conformance test for the listed difference",
+          "key": "services",
+          "line": 14,
+          "message": "binding `AUTH` (services) runs with known differences; check the binding doc before relying on it",
+          "severity": "warning",
+          "status": "partial"
+        }
+      ],
+      "name": "shop-api-edge"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "shop-api",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-09-03",
+  "kv_namespaces": [{ "binding": "CACHE", "id": "cache" }],
+  "analytics_engine_datasets": [{ "binding": "ANALYTICS", "dataset": "events" }],
+  "vectorize": [{ "binding": "INDEX", "index_name": "products" }],
+  "containers": [{ "class_name": "Sandbox" }],
+  "env": {
+    "staging": { "name": "shop-api-staging" },
+    "edge": {
+      "name": "shop-api-edge",
+      "ai": { "binding": "AI" },
+      "services": [{ "binding": "AUTH", "service": "auth" }]
+    }
+  }
+}

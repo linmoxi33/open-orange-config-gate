@@ -1,0 +1,61 @@
+{
+  "input_sha256": "5011176a5bda07e45c4d543578711ad710b817e7b52d23b4f61a7c4fef2cc7d3",
+  "pinned_commit": "e5e795446d2b8d9e7be289d6fbc6f87630e1ef34",
+  "schema_version": 1,
+  "summary": {
+    "blockers": 0,
+    "silent_data_loss": 0,
+    "warnings": 0,
+    "workers": 1
+  },
+  "tool": "open-orange-config-gate",
+  "upstream": "https://github.com/rivet-dev/open-orange",
+  "workers": [
+    {
+      "config": "examples/in/clean/wrangler.jsonc",
+      "environment": "production",
+      "findings": [
+        {
+          "binding": "DB",
+          "code": "BINDING_DROP_IN",
+          "environment": "production",
+          "evidence": "https://github.com/rivet-dev/open-orange/blob/e5e795446d2b8d9e7be289d6fbc6f87630e1ef34/docs/modules/bindings.mdx#L155",
+          "failure_mode": "none",
+          "fix": "read the per-binding doc page and add a conformance test for the listed difference",
+          "key": "d1_databases",
+          "line": 7,
+          "message": "binding `DB` (d1_databases) runs with known differences; check the binding doc before relying on it",
+          "severity": "info",
+          "status": "drop_in"
+        },
+        {
+          "binding": "CACHE",
+          "code": "BINDING_DROP_IN",
+          "environment": "production",
+          "evidence": "https://github.com/rivet-dev/open-orange/blob/e5e795446d2b8d9e7be289d6fbc6f87630e1ef34/docs/modules/bindings.mdx#L118",
+          "failure_mode": "none",
+          "fix": "read the per-binding doc page and add a conformance test for the listed difference",
+          "key": "kv_namespaces",
+          "line": 6,
+          "message": "binding `CACHE` (kv_namespaces) runs with known differences; check the binding doc before relying on it",
+          "severity": "info",
+          "status": "drop_in"
+        },
+        {
+          "binding": "EMAILS",
+          "code": "BINDING_DROP_IN",
+          "environment": "production",
+          "evidence": "https://github.com/rivet-dev/open-orange/blob/e5e795446d2b8d9e7be289d6fbc6f87630e1ef34/docs/modules/bindings.mdx#L157",
+          "failure_mode": "none",
+          "fix": "read the per-binding doc page and add a conformance test for the listed difference",
+          "key": "queues",
+          "line": 8,
+          "message": "binding `EMAILS` (queues) runs with known differences; check the binding doc before relying on it",
+          "severity": "info",
+          "status": "drop_in"
+        }
+      ],
+      "name": "clean-worker"
+    }
+  ]
+}

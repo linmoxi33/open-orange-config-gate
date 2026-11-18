@@ -1,0 +1,48 @@
+{
+  "input_sha256": "b2c00657f46d01d1a5c58239eaf21a78822752d1b07a8795f4a4cb6fc31ad8c2",
+  "pinned_commit": "e5e795446d2b8d9e7be289d6fbc6f87630e1ef34",
+  "schema_version": 1,
+  "summary": {
+    "blockers": 1,
+    "silent_data_loss": 0,
+    "warnings": 0,
+    "workers": 1
+  },
+  "tool": "open-orange-config-gate",
+  "upstream": "https://github.com/rivet-dev/open-orange",
+  "workers": [
+    {
+      "config": "examples/in/toml/wrangler.toml",
+      "environment": "production",
+      "findings": [
+        {
+          "binding": "DB",
+          "code": "BINDING_DROP_IN",
+          "environment": "production",
+          "evidence": "https://github.com/rivet-dev/open-orange/blob/e5e795446d2b8d9e7be289d6fbc6f87630e1ef34/docs/modules/bindings.mdx#L155",
+          "failure_mode": "none",
+          "fix": "read the per-binding doc page and add a conformance test for the listed difference",
+          "key": "d1_databases",
+          "line": 0,
+          "message": "binding `DB` (d1_databases) runs with known differences; check the binding doc before relying on it",
+          "severity": "info",
+          "status": "drop_in"
+        },
+        {
+          "binding": "PIPE",
+          "code": "BINDING_NOT_SUPPORTED",
+          "environment": "production",
+          "evidence": "https://github.com/rivet-dev/open-orange/blob/e5e795446d2b8d9e7be289d6fbc6f87630e1ef34/docs/modules/bindings.mdx#L133",
+          "failure_mode": "throws",
+          "fix": "move this binding behind a Cloudflare-only worker, or remove it before migrating",
+          "key": "pipelines",
+          "line": 0,
+          "message": "binding `PIPE` (pipelines) is not supported: calls throw at runtime",
+          "severity": "blocker",
+          "status": "not_supported"
+        }
+      ],
+      "name": "toml-worker"
+    }
+  ]
+}
