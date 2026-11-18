@@ -1,0 +1,20 @@
+name: test
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: unit tests
+        run: python3 -m unittest discover -s tests -v
+      - name: risky config must exit 1
+        run: |
+          set +e
+          python3 bin/open_orange_config_gate.py check examples/in/risky --json > /dev/null
+          rc=$?
+          test "$rc" -eq 1
+      - name: clean config must exit 0
+        run: python3 bin/open_orange_config_gate.py check examples/in/clean --json > /dev/null
